@@ -131,3 +131,35 @@ class AuthorDelete(DeleteView):
 class AuthorListView(generic.ListView):
     model = Author
     paginate_by = 10
+
+class AuthorListView(generic.ListView):
+    model = Author
+    context_object_name = 'author_list'  # ваше собственное имя переменной контекста в шаблоне
+    template_name = 'catalog/author_list.html'  # Определение имени вашего шаблона и его расположения
+
+    def get_context_data(self, **kwargs):
+        # В первую очередь получаем базовую реализацию контекста
+        context = super(AuthorListView, self).get_context_data(**kwargs)
+        # Добавляем новую переменную к контексту и инициализируем её некоторым значением
+        context['some_data'] = 'This is just some data'
+        return context
+
+
+class AuthorDetailView(generic.DetailView):
+    model = Author
+    paginate_by = 10
+
+
+def author_detail_view(request, pk):
+    try:
+        author_id = Author.objects.get(pk=pk)
+    except Author.DoesNotExist:
+        raise Http404("Book does not exist")
+
+    # book_id=get_object_or_404(Book, pk=pk)
+
+    return render(
+        request,
+        'catalog/author_detail.html',
+        context={'author': author_id, }
+    )

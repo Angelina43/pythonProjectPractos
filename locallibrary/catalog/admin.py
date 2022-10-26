@@ -6,8 +6,6 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 # admin.site.register(Book)
 # admin.site.register(Author)
 admin.site.register(Genre)
-
-
 # admin.site.register(BookInstance)
 
 class AuthorAdmin(admin.ModelAdmin):
@@ -50,5 +48,4 @@ def my_view(request):
         permission_required = ('catalog.can_mark_returned', 'catalog.can_edit')
         # Note that 'catalog.can_edit' is just an example
         # the catalog application doesn't have such permission!
-
 

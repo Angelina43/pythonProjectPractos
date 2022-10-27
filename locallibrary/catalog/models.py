@@ -77,5 +77,6 @@ class Author(models.Model):
 
 class Language(models.Model):
     language = models.CharField(max_length=100)
+
     def __str__(self):
         return '%s' % (self.language)
